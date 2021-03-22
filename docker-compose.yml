@@ -1,0 +1,17 @@
+version: '3.5'
+
+services:
+  svs_processor:
+    build:
+      context: .
+      dockerfile: svs_processor/Dockerfile
+    container_name: svs-processor
+    command: ["python", "-m", "pytest", "-s", "-x", "--cov-report", "html:/docker_scratch/htmlreport", "--cov=svs_processor", "tests/"]
+    env_file:
+      - svs_processor/test.env
+    image: pennsieve/svs-processor:${IMAGE_TAG}
+    volumes:
+      - ./svs_processor/tests/resources:/test-resources/
+    environment:
+      AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
+      AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}

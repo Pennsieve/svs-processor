@@ -1,0 +1,10 @@
+version: '3.5'
+
+services:
+  svs_processor:
+    build:
+      context: .
+      target: prod
+      dockerfile: svs_processor/Dockerfile
+    container_name: svs-processor
+    image: pennsieve/svs-processor:${IMAGE_TAG}

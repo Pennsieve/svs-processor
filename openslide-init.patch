@@ -1,0 +1,14 @@
+diff -Naur openslide-3.4.1-orig/src/openslide.c openslide-3.4.1/src/openslide.c
+--- openslide-3.4.1-orig/src/openslide.c
+100
++++ openslide-3.4.1/src/openslide.c
+@@ -61,7 +61,9 @@
+     g_thread_init(NULL);
+   }
+   // initialize GObject
++#if !GLIB_CHECK_VERSION(2, 36, 0)
+   g_type_init();
++#endif
+   // init libxml2
+   xmlInitParser();
+   // parse debug options
